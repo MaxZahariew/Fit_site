@@ -7,7 +7,7 @@ from django.contrib.auth.base_user import BaseUserManager
 import uuid
 from django.utils import timezone
 from .services import get_path_avatar_for_user
-from myfitnes_site.settings import EMAIL_HOST_USER
+# from myfitnes_site.settings import EMAIL_HOST_USER
 from django.urls import reverse
 from django.conf import settings
 
@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(_('email'), unique=True)
     phone = models.CharField('Телефон', max_length=11,
@@ -43,6 +43,16 @@ class User(AbstractBaseUser):
     date_joined = models.DateTimeField(_('registered'), auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_set',  # Уникальное имя для обратного доступа
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_permissions_set',  # Уникальное имя для обратного доступа
+        blank=True,
+    )
 
     objects = UserManager()
 
@@ -67,9 +77,9 @@ class EmailVerification(models.Model):
         url = f'{settings.DOMAIN_NAME}{link}'
         send_mail(
             'Подтверждение адреса электронной почты',
-            f'Пожалуйста, подтвердите свою почту {self.user.email} \
-            перейдя по ссылке: {url}',
-            EMAIL_HOST_USER,
+            f'Пожалуйста, подтвердите свою почту {self.user.email} перейдя по\
+                ссылке: {url}',
+            settings.EMAIL_HOST_USER,
             [self.user.email],
             fail_silently=False,
         )

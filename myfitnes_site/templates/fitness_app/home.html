@@ -1,131 +1,143 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>DJ Fitness - {{ title }}</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+    <link rel="shortcut icon" href="{% static 'assets/img/icon.png' %}" type="image/x-icon" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>DJ Fitness - {{ title }}</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-  <link rel="shortcut icon" href="{% static 'assets/img/icon.png' %}" type="image/x-icon"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
 
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
-  <!-- Vendor CSS Files -->
-  <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <!-- Template Main CSS File -->
-  <link href="static/assets/css/style.css" rel="stylesheet">
-</head>
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+  </head>
 
-<body>
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center justify-content-lg-between">
+        <h1 class="logo me-auto me-lg-0"><a href="{% url 'home' %}"><span class="text-warning">DJ FITNESS</span></a></h1>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center justify-content-lg-between">
-  
-      <h1 class="logo me-auto me-lg-0"><a href="{% url 'home' %}"><span class="text-warning">DJ FITNESS</span></a></h1>
-  
-  
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto" href="#"> Абонементы</a></li>
-          <li><a class="nav-link scrollto " href="#">Тренеры</a></li>
-          <li><a class="nav-link scrollto " href="#">Расписание тренировок</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Контакты</a></li>
-  
-          {% if request.user.is_authenticated %}
-  
-          <li class="dropdown"><a href="#"><span>Членство клуба</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Мои Абонементы</a></li>
-              <li><a href="#">Мои Тренировки</a></li>
-              <li><a href="#">Записаться на тренировку</a></li>
-              <li><a href="#">Мой профиль</a></li>
-              <hr>
-              <li><a>{{ request.user.email }}</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#">Выйти</a></li>
-  
-          {% else %}
-          <li><a class="nav-link scrollto" href="#">Войти</a></li>
-          <li><a class="nav-link scrollto" href="#">Регистрация</a></li>
-          {% endif %}
-  
-  
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-  
-      <a href="#" class="get-started-btn scrollto">Купить абонемент</a>
-  
-    </div>
-  </header>
-  <!-- End Header -->
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li>
+              <a class="nav-link scrollto" href="#">Абонементы</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="#">Тренеры</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="#">Расписание тренировок</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="#">Конакты</a>
+            </li>
 
-  <!-- ======= Hero Section ======= -->
-  {% comment %} {% include 'components/section.html' %} {% endcomment %}
-  <!-- End Hero -->
+            {% if request.user.is_authenticated %}
+              <li class="dropdown">
+                <a href="#"><span>Членство клуба</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                  <li>
+                    <a href="#">Мои Абонементы</a>
+                  </li>
+                  <li>
+                    <a href="#">Мои Тренировки</a>
+                  </li>
+                  <li>
+                    <a href="#">Записаться на тренировку</a>
+                  </li>
+                  <li>
+                    <a href="#">Мой профиль</a>
+                  </li>
+                  <hr />
+                  <li>
+                    <a>{{ request.user.email }}</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a class="nav-link scrollto" href="#">Выйти</a>
+              </li>
+            {% else %}
+              <li>
+                <a class="nav-link scrollto" href="#">Войти</a>
+              </li>
+              <li>
+                <a class="nav-link scrollto" href="#">Регистрация</a>
+              </li>
+            {% endif %}
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
 
-  {% comment %} <main id="main">
+        <a href="#" class="get-started-btn scrollto">Купить абонемент</a>
+      </div>
+    </header>
+    <!-- End Header -->
 
-    <!-- ======= About Section ======= -->
-    {% include 'components/about_section.html' %}
-    <!-- End About Section -->
+    <!-- ======= Hero Section ======= -->
+    {% comment %} {% include 'components/section.html' %} {% endcomment %}
+    <!-- End Hero -->
 
-    <!-- ======= Clients Section ======= -->
-    {% include 'components/clients.html' %}
-    <!-- End Clients Section -->
+    {% comment %} <main id="main">
+      <!-- ======= About Section ======= -->
+      {% include 'components/about_section.html' %}
+      <!-- End About Section -->
 
-    <!-- ======= Features Section ======= -->
-    {% include 'components/features_section.html' %}
-    <!-- End Features Section -->
+      <!-- ======= Clients Section ======= -->
+      {% include 'components/clients.html' %}
+      <!-- End Clients Section -->
 
-    <!-- ======= Services Section ======= -->
-    {% include 'components/services_section.html' %}
-    <!-- End Services Section -->
+      <!-- ======= Features Section ======= -->
+      {% include 'components/features_section.html' %}
+      <!-- End Features Section -->
 
-    <!-- ======= Cta Section ======= -->
-    {% include 'components/cta.html' %}
-    <!-- End Cta Section -->
+      <!-- ======= Services Section ======= -->
+      {% include 'components/services_section.html' %}
+      <!-- End Services Section -->
 
-    <!-- ======= Portfolio Section ======= -->
+      <!-- ======= Cta Section ======= -->
+      {% include 'components/cta.html' %}
+      <!-- End Cta Section -->
 
-    <!-- ======= Contact Section ======= -->
-    {% include 'components/contact.html' %}
-    <!-- End Contact Section -->
+      <!-- ======= Portfolio Section ======= -->
 
-  </main><!-- End #main -->
+      <!-- ======= Contact Section ======= -->
+      {% include 'components/contact.html' %}
+      <!-- End Contact Section -->
+    </main>
+    <!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  {% include 'components/footer.html' %}
-  <!-- End Footer --> {% endcomment %}
+    <!-- ======= Footer ======= -->
+    {% include 'components/footer.html' %}
+    <!-- End Footer --> {% endcomment %}
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="static/assets/vendor/aos/aos.js"></script>
-  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="static/assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="static/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="static/assets/vendor/php-email-form/validate.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="{% static '/assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static '/assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static '/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static '/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static '/assets/vendor/php-email-form/validate.js' %}"></script>
 
-  <!-- Template Main JS File -->
-  <script src="static/assets/js/main.js"></script>
-
-</body>
-
+    <!-- Template Main JS File -->
+    <script src="{% static '/assets/js/main.js' %}"></script>
+  </body>
 </html>
